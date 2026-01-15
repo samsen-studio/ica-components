@@ -1,298 +1,146 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICA Product Card Component</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ica-red: #cf2005;
-      --ica-red-dark: #b81c04;
-      --ica-dark: #222222;
-      --ica-gray-600: #525252;
-      --ica-white: #ffffff;
-      --ica-bg: #f9f5f5;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+  :root {
+    --ica-red: #cf2005;
+    --ica-red-dark: #b81c04;
+    --ica-dark: #222222;
+    --ica-gray-600: #525252;
+    --ica-white: #ffffff;
+  }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--ica-bg);
-      padding: 40px;
-    }
+  .product-card {
+    font-family: 'Inter', sans-serif;
+    background: var(--ica-white);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    width: 340px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
 
-    /* Product Card - Landscape */
-    .product-card {
-      background: var(--ica-white);
-      border-radius: 16px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-      width: 340px;
-    }
+  .card-image-wrap {
+    position: relative;
+    padding: 12px;
+    width: 140px;
+    flex-shrink: 0;
+  }
 
-    .card-image-wrap {
-      position: relative;
-      padding: 12px;
-      width: 140px;
-      flex-shrink: 0;
-    }
+  .card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 12px;
+    color: var(--ica-dark);
+    background: var(--ica-white);
+    padding: 2px 8px;
+    border-radius: 4px;
+    z-index: 1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
 
-    .card-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 12px;
-      color: var(--ica-dark);
-      background: var(--ica-white);
-      padding: 2px 8px;
-      border-radius: 4px;
-      z-index: 1;
-    }
+  .card-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
 
-    .card-image {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: contain;
-    }
+  .card-body {
+    padding: 16px 16px 16px 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 
-    .card-body {
-      padding: 16px 16px 16px 0;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+  .card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ica-dark);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
 
-    .card-title {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--ica-dark);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
+  .card-info {
+    flex: 1;
+  }
 
-    .card-info {
-      flex: 1;
-    }
+  .card-size {
+    font-size: 14px;
+    color: var(--ica-gray-600);
+    margin-bottom: 8px;
+  }
 
-    .card-size {
-      font-size: 14px;
-      color: var(--ica-gray-600);
-      margin-bottom: 8px;
-    }
+  .card-bottom {
+    margin-top: auto;
+  }
 
-    .card-bottom {
-      margin-top: auto;
-    }
+  .card-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ica-red);
+    margin-bottom: 8px;
+  }
 
-    .card-price {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ica-red);
-      margin-bottom: 8px;
-    }
+  .card-add {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--ica-red);
+    color: var(--ica-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
 
-    .card-add {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--ica-red);
-      color: var(--ica-white);
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  .card-add:hover {
+    background: var(--ica-red-dark);
+  }
 
-    .card-add:hover {
-      background: var(--ica-red-dark);
-    }
+  .product-cards-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+</style>
 
-    /* Demo container */
-    #card-container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-  </style>
-</head>
-<body>
-  <h1 style="margin-bottom: 24px; color: var(--ica-dark);">ICA Product Card Component</h1>
+<div class="product-cards-container" id="ica-cards"></div>
 
-  <div id="card-container">
-    <!-- Cards rendered here -->
-  </div>
+<script>
+  // Sample product data
+  const products = [
+    { id: '1', title: 'Kikärtor', size: '230g', unitPrice: '43,50 kr/kg', price: '10,00 kr', origin: 'Italien', image: 'https://images.openfoodfacts.org/images/products/731/869/005/0919/front_en.35.400.jpg' },
+    { id: '2', title: 'Mjölk 3.0%', size: '1.5l', unitPrice: '13,00 kr/l', price: '19,50 kr', origin: 'Sverige', image: 'https://images.openfoodfacts.org/images/products/731/869/013/6156/front_sv.25.400.jpg' },
+  ];
 
-  <script>
-    // Open Food Facts API Service
-    const OpenFoodFacts = {
-      // Use CORS-friendly endpoint
-      baseUrl: 'https://world.openfoodfacts.org/cgi/search.pl',
+  function createProductCard(product) {
+    const sizeInfo = product.size && product.unitPrice
+      ? `${product.size} (${product.unitPrice})`
+      : product.size || '';
 
-      // Alternative: use their CORS-enabled API
-      apiUrl: 'https://world.openfoodfacts.org/api/v2/search',
-
-      // Fetch products by brand (e.g., 'ica', 'arla')
-      async fetchByBrand(brand, limit = 10) {
-        const url = `${this.apiUrl}?brands_tags=${brand}&page_size=${limit}&fields=code,product_name,brands,quantity,image_url,origins,countries`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return this.transformProducts(data.products || []);
-      },
-
-      // Fetch products by search term
-      async search(query, limit = 10) {
-        const url = `${this.apiUrl}?search_terms=${encodeURIComponent(query)}&page_size=${limit}&fields=code,product_name,brands,quantity,image_url,origins,countries`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return this.transformProducts(data.products || []);
-      },
-
-      // Fetch Swedish products
-      async fetchSwedish(limit = 10) {
-        const url = `${this.apiUrl}?countries_tags=sweden&page_size=${limit}&fields=code,product_name,brands,quantity,image_url,origins,countries`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return this.transformProducts(data.products || []);
-      },
-
-      // Transform API response to our card format
-      transformProducts(products) {
-        return products
-          .filter(p => p.product_name && p.image_url)
-          .map(p => ({
-            id: p.code || p._id,
-            title: p.product_name,
-            brand: p.brands || '',
-            size: p.quantity || '',
-            image: p.image_url,
-            origin: this.parseOrigin(p.origins || p.countries || ''),
-            // Generate realistic Swedish price (Open Food Facts doesn't have prices)
-            price: this.generatePrice(p.quantity),
-            unitPrice: this.generateUnitPrice(p.quantity)
-          }));
-      },
-
-      parseOrigin(origin) {
-        if (!origin) return 'Sverige';
-        // Take first country, clean up
-        const first = origin.split(',')[0].trim();
-        // Map common names to Swedish
-        const map = {
-          'Sweden': 'Sverige',
-          'Germany': 'Tyskland',
-          'Italy': 'Italien',
-          'France': 'Frankrike',
-          'Spain': 'Spanien',
-          'Norway': 'Norge',
-          'Denmark': 'Danmark',
-          'Finland': 'Finland',
-          'Netherlands': 'Nederländerna',
-          'Belgium': 'Belgien',
-          'Poland': 'Polen',
-          'USA': 'USA',
-          'China': 'Kina'
-        };
-        return map[first] || first;
-      },
-
-      generatePrice(quantity) {
-        // Generate realistic price rounded to .00 or .50
-        const base = Math.random() * 40 + 10; // 10-50 kr base
-        const rounded = Math.round(base * 2) / 2; // Round to nearest 0.50
-        const formatted = rounded % 1 === 0 ? `${rounded},00` : `${Math.floor(rounded)},50`;
-        return `${formatted} kr`;
-      },
-
-      generateUnitPrice(quantity) {
-        if (!quantity) return '';
-        const match = quantity.match(/(\d+(?:[.,]\d+)?)\s*(kg|g|l|ml|cl|dl)/i);
-        if (!match) return '';
-
-        let value = parseFloat(match[1].replace(',', '.'));
-        const unit = match[2].toLowerCase();
-
-        // Convert to base unit
-        if (unit === 'g') value = value / 1000;
-        if (unit === 'ml') value = value / 1000;
-        if (unit === 'cl') value = value / 100;
-        if (unit === 'dl') value = value / 10;
-
-        const pricePerUnit = (Math.random() * 80 + 20) / value;
-        // Round to nearest 0.50
-        const rounded = Math.round(pricePerUnit * 2) / 2;
-        const formatted = rounded % 1 === 0 ? `${rounded},00` : `${Math.floor(rounded)},50`;
-        const unitLabel = (unit === 'g' || unit === 'kg') ? 'kr/kg' : 'kr/l';
-
-        return `${formatted} ${unitLabel}`;
-      }
-    };
-
-    // Card Component
-    function createProductCard(product) {
-      const sizeInfo = product.size && product.unitPrice
-        ? `${product.size} (${product.unitPrice})`
-        : product.size || '';
-
-      return `
-        <div class="product-card" data-product-id="${product.id}">
-          <div class="card-image-wrap">
-            <span class="card-badge">${product.origin}</span>
-            <img src="${product.image}" alt="${product.title}" class="card-image">
+    return `
+      <div class="product-card" data-product-id="${product.id}">
+        <div class="card-image-wrap">
+          <span class="card-badge">${product.origin}</span>
+          <img src="${product.image}" alt="${product.title}" class="card-image">
+        </div>
+        <div class="card-body">
+          <div class="card-info">
+            <div class="card-title">${product.title}</div>
+            <div class="card-size">${sizeInfo}</div>
           </div>
-          <div class="card-body">
-            <div class="card-info">
-              <div class="card-title">${product.title}</div>
-              <div class="card-size">${sizeInfo}</div>
-            </div>
-            <div class="card-bottom">
-              <div class="card-price">${product.price}</div>
-              <button class="card-add">Lägg till</button>
-            </div>
+          <div class="card-bottom">
+            <div class="card-price">${product.price}</div>
+            <button class="card-add">Lägg till</button>
           </div>
         </div>
-      `;
-    }
+      </div>
+    `;
+  }
 
-    // Render products
-    function renderProducts(products) {
-      const container = document.getElementById('card-container');
-      container.innerHTML = products.map(createProductCard).join('');
-    }
-
-    // Fallback products for local testing (file:// can't fetch API)
-    const fallbackProducts = [
-      { id: '1', title: 'Kikärtor', brand: 'ICA', size: '230g', unitPrice: '43,50 kr/kg', price: '10,00 kr', origin: 'Italien', image: 'https://images.openfoodfacts.org/images/products/731/869/005/0919/front_en.35.400.jpg' },
-      { id: '2', title: 'Mjölk 3.0%', brand: 'ICA', size: '1.5l', unitPrice: '13,00 kr/l', price: '19,50 kr', origin: 'Sverige', image: 'https://images.openfoodfacts.org/images/products/731/869/013/6156/front_sv.25.400.jpg' },
-      { id: '3', title: 'Mellanmjölkdryck Laktosfri', brand: 'ICA', size: '1.5l', unitPrice: '20,00 kr/l', price: '30,00 kr', origin: 'Sverige', image: 'https://images.openfoodfacts.org/images/products/731/869/013/3025/front_sv.10.400.jpg' },
-      { id: '4', title: 'Flytande Honung', brand: 'ICA', size: '350g', unitPrice: '114,00 kr/kg', price: '40,00 kr', origin: 'Sverige', image: 'https://images.openfoodfacts.org/images/products/731/869/005/8274/front_sv.10.400.jpg' },
-      { id: '5', title: 'Babyplommontomater', brand: 'ICA', size: '250g', unitPrice: '80,00 kr/kg', price: '20,00 kr', origin: 'Marocko', image: 'https://images.openfoodfacts.org/images/products/731/869/007/5523/front_sv.18.400.jpg' },
-      { id: '6', title: 'Bregott Normalsaltat', brand: 'Arla', size: '500g', unitPrice: '108,00 kr/kg', price: '54,00 kr', origin: 'Sverige', image: 'https://images.openfoodfacts.org/images/products/731/187/001/0970/front_sv.27.400.jpg' },
-      { id: '7', title: 'Krossade tomater', brand: 'ICA', size: '500g', unitPrice: '26,00 kr/kg', price: '13,00 kr', origin: 'Italien', image: 'https://images.openfoodfacts.org/images/products/731/869/001/3402/front_sv.12.400.jpg' },
-      { id: '8', title: 'Gräddfil', brand: 'ICA', size: '3dl', unitPrice: '46,50 kr/l', price: '14,00 kr', origin: 'Sverige', image: 'https://images.openfoodfacts.org/images/products/731/869/005/5983/front_sv.18.400.jpg' }
-    ];
-
-    // Load ICA products on page load
-    async function init() {
-      const container = document.getElementById('card-container');
-      container.innerHTML = '<p>Loading products...</p>';
-
-      try {
-        const products = await OpenFoodFacts.fetchByBrand('ica', 8);
-        renderProducts(products);
-      } catch (err) {
-        console.log('API failed, using fallback:', err.message);
-        renderProducts(fallbackProducts);
-      }
-    }
-
-    init();
-  </script>
-</body>
-</html>
+  // Render cards
+  document.getElementById('ica-cards').innerHTML = products.map(createProductCard).join('');
+</script>
