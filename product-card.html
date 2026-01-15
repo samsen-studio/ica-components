@@ -89,15 +89,15 @@
 
 <div class="product-card">
   <div class="card-image-wrap">
-    <span class="card-badge">Sverige</span>
-    <img src="https://images.openfoodfacts.org/images/products/731/869/013/6156/front_sv.25.400.jpg" alt="Mjölk" class="card-image">
+    <span class="card-badge" data-field="origin">{{origin}}</span>
+    <img src="{{image_url}}" alt="{{title}}" class="card-image" data-field="image">
   </div>
   <div class="card-body">
-    <div class="card-title">Mjölk 3.0%</div>
-    <div class="card-size">1.5l (13,00 kr/l)</div>
+    <div class="card-title" data-field="title">{{title}}</div>
+    <div class="card-size" data-field="size">{{size}}</div>
     <div class="card-bottom">
-      <div class="card-price">19,50 kr</div>
-      <button class="card-add">Lägg till</button>
+      <div class="card-price" data-field="price">{{price}}</div>
+      <button class="card-add" data-field="button_text">{{button_text}}</button>
     </div>
   </div>
 </div>
